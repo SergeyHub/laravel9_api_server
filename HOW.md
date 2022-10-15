@@ -69,6 +69,7 @@ DB_PASSWORD=123456
 API_STANDARDS_TREE=vnd
 API_SUBTYPE=myapp
 API_PREFIX=api
+API_DEBUG=true
 ``` 
    
 `git init`  
@@ -77,7 +78,34 @@ API_PREFIX=api
 **`git remote add origin https://github.com/SergeyHub/laravel_crud_api_vue_back.git`**  
 `git push -u origin master`  
 
+
+#### 3 Install jwt-auth
+
+`composer require tymon/jwt-auth:*`  
+
+**`Edit  config/app.php file`**
 ```
+Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+```
+#####3.1 Publish the config  
+Run the following command to publish the package config file:      
+
+**`php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"`**  
+
+You should now have a config/jwt.php file that allows you to configure the basics of this package.
+
+#####3.2 Generate secret key  
+
+`php artisan jwt:secret`  
+This will update your .env file with something like JWT_SECRET=foobar  
+
+**`Edit  config/api.php file`**
+```
+'auth' => [
+        'jwt' => 'Dingo\Api\Auth\Provider\JWT'
+    ],
+```
+
 ##### 1.3 Migration
 
 `php artisan migrate`  

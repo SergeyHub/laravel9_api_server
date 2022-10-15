@@ -57,11 +57,19 @@ DB_PORT=3306
 DB_DATABASE=crud_api
 DB_USERNAME=root
 DB_PASSWORD=123456
+```
 
 #### 2 Install Dingo
   
 `composer require api-ecosystem-for-laravel/dingo-api`   
  `php artisan vendor:publish --provider="Dingo\Api\Provider\LaravelServiceProvider"`
+ 
+**`Edit  env. file`**   
+```
+API_STANDARDS_TREE=vnd
+API_SUBTYPE=myapp
+API_PREFIX=api
+``` 
    
 `git init`  
 `git add .`  

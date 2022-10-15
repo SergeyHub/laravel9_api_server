@@ -11,17 +11,6 @@
 **`git remote add origin https://github.com/SergeyHub/laravel9_dingo_api.git`**  
 `git push -u origin master`  
 
-##### 1.1 Install Dingo
-  
-`composer require api-ecosystem-for-laravel/dingo-api`   
- `php artisan vendor:publish --provider="Dingo\Api\Provider\LaravelServiceProvider"`
-   
-`git init`  
-`git add .`  
-`git commit –m "Comment"`  
-**`git remote add origin https://github.com/SergeyHub/laravel_crud_api_vue_back.git`**  
-`git push -u origin master`  
-
 ##### 1.2 Postgersql
 ```
 Let's start SQL Shell (psql). The program will prompt you to enter the name    
@@ -68,6 +57,18 @@ DB_PORT=3306
 DB_DATABASE=crud_api
 DB_USERNAME=root
 DB_PASSWORD=123456
+
+#### 2 Install Dingo
+  
+`composer require api-ecosystem-for-laravel/dingo-api`   
+ `php artisan vendor:publish --provider="Dingo\Api\Provider\LaravelServiceProvider"`
+   
+`git init`  
+`git add .`  
+`git commit –m "Comment"`  
+**`git remote add origin https://github.com/SergeyHub/laravel_crud_api_vue_back.git`**  
+`git push -u origin master`  
+
 ```
 ##### 1.3 Migration
 

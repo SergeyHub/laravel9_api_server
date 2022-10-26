@@ -67,8 +67,10 @@ DB_PASSWORD=123456
 **`Edit  env. file`**   
 ```
 API_STANDARDS_TREE=vnd
-API_SUBTYPE=myapp
+API_SUBTYPE=storeapi
+API_VERSION=v1
 API_PREFIX=api
+API_NAME=StoresAPI
 API_DEBUG=true
 ``` 
    
@@ -106,7 +108,22 @@ This will update your .env file with something like JWT_SECRET=foobar
     ],
 ```
 
-##### 1.3 Migration
+#### 4. Database Design ER and migration
+![Screenshot](readme/er.JPG)   
+ 
+`php artisan make:model Post --all --api`  
+`php artisan make:model Comment --all --api`
+`php artisan make:model Post_User`
+`php artisan migrate` 
+
+`git add .`  
+`git commit –m "Comment"`  
+`git push -u origin master`  
+
+
+
+
+##### 1.3 Migration 
 
 `php artisan migrate`  
 

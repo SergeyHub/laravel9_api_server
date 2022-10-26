@@ -120,8 +120,9 @@ This will update your .env file with something like JWT_SECRET=foobar
 `git commit –m "Comment"`  
 `git push -u origin master`  
 
-
-
+#### 5. Seeds & Factories
+seeders->Traits  
+`php artisan db:seed`  
 
 ##### 1.3 Migration 
 

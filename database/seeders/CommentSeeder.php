@@ -20,6 +20,7 @@ class CommentSeeder extends Seeder
     {
         $this->disableForeignKeys();
         $this->truncate('comments');
+
         Comment::factory(30)->create();
         $this->enableForeignKeys();
     }

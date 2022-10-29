@@ -162,6 +162,8 @@ Psy Shell v0.11.8 (PHP 8.1.8 — cli) by Justin Hileman
 
 >>>    
 ```
+#### 7. Edit PostSeeder & CommentFactory. Create FactoryHelper
+
 ##### 1.3 Migration 
 
 `php artisan migrate`  

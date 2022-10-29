@@ -14,13 +14,20 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/users/{user}', [UserController::class, 'show']);
 
-Route::post('/users', [UserController::class, 'store']);
+Route::prefix('v1')
+    ->group(function (){
+        //require __DIR__ . '/api/v1/users.php';
+        //require __DIR__ . '/api/v1/posts.php';
+        //require __DIR__ . '/api/v1/comments.php';
+    });
 
-Route::patch('/users/{user}', [UserController::class, 'update']);
 
-Route::delete('/users/{user}', [UserController::class, 'destroy']);
+Route::controller(UserController::class)->group(function () {
+    Route::get('/users/{user}', 'show');
+    Route::post('/users', 'store')->name('store');
+    Route::patch('/users/{user}', 'update')->name('update');
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

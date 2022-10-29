@@ -62,6 +62,7 @@ DB_PASSWORD=123456
 #### 2 Install Dingo
   
 `composer require api-ecosystem-for-laravel/dingo-api`   
+`composer remove api-ecosystem-for-laravel/dingo-api`   
  `php artisan vendor:publish --provider="Dingo\Api\Provider\LaravelServiceProvider"`
  
 **`Edit  env. file`**   
@@ -163,6 +164,12 @@ Psy Shell v0.11.8 (PHP 8.1.8 — cli) by Justin Hileman
 >>>    
 ```
 #### 7. Edit PostSeeder & CommentFactory. Create FactoryHelper
+
+#### 8. Api Routes
+
+
+
+
 
 ##### 1.3 Migration 
 

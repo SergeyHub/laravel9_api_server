@@ -124,6 +124,44 @@ This will update your .env file with something like JWT_SECRET=foobar
 seeders->Traits  
 `php artisan db:seed`  
 
+#### 6. Edit Post User & Comment models
+
+```
+php artisan tinker
+Psy Shell v0.11.8 (PHP 8.1.8 — cli) by Justin Hileman
+>>> \App\Models\Post::find(1)
+=> App\Models\Post {#4101
+     id: 1,
+     title: "untitled",
+     body: "[]",
+     created_at: "2022-10-26 19:04:39",
+     updated_at: "2022-10-26 19:04:39",
+   }
+
+>>> \App\Models\Post::find(10)
+=> App\Models\Post {#4717
+     id: 10,
+     title: "untitled",
+     body: "[]",
+     created_at: "2022-10-26 19:04:39",
+     updated_at: "2022-10-26 19:04:39",
+   }
+>>> \App\Models\Post::find(10)->comments
+=> Illuminate\Database\Eloquent\Collection {#4714
+     all: [
+       App\Models\Comment {#3765
+         id: 2,
+         body: "[]",
+         user_id: 2,
+         post_id: 10,
+         created_at: "2022-10-26 19:04:39",
+         updated_at: "2022-10-26 19:04:39",
+       },
+     ],
+   }
+
+>>>    
+```
 ##### 1.3 Migration 
 
 `php artisan migrate`  

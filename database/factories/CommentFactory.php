@@ -24,7 +24,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'body' => [],
+            'body' => $this->faker->realTextBetween($minNbChars = 25, $maxNbChars = 50, $indexSize = 2),
             'user_id' => $this->faker->numberBetween(1,10),
             'post_id' => $this->faker->numberBetween(1,30),
         ];

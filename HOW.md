@@ -173,7 +173,9 @@ Psy Shell v0.11.8 (PHP 8.1.8 — cli) by Justin Hileman
 #### 11. sclasses table
 `php artisan make:model Sclass --all`  
 `php artisan make:controller Api/Sclass --resource`  
-
+#### 12. Subject Model route controller request
+`php artisan make:model Subject -m`  
+`php artisan make:controller Api/SubjectController --resource`  
 
 
 

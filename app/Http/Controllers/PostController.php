@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
@@ -15,7 +17,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::query()->get();
+
+        return new JsonResponse([
+            'data' => $posts
+        ]);
     }
 
     /**
@@ -26,7 +32,15 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        //Post::query()->create($request->toArray());
+        $created = Post::query()->create([
+            'title' => $request->title,
+            'body'  => $request->body,
+        ]);
+
+        return new JsonResponse([
+            'data' => $created
+        ]);
     }
 
     /**
@@ -37,7 +51,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return new JsonResponse([
+            'data' => $post
+        ]);
     }
 
     /**

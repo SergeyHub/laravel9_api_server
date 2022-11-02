@@ -169,8 +169,22 @@ Psy Shell v0.11.8 (PHP 8.1.8 — cli) by Justin Hileman
 #### 9. UserController
 `php artisan make:controller UserController`    
 #### 10. Edit api routes
+`git push -u origin master`  
+#### 11. sclasses table
+`php artisan make:model Sclass --all`  
+`php artisan make:controller Api/Sclass --resource`  
 
 
+
+
+
+
+
+
+
+
+
+-------------------old--------------------
 ##### 1.3 Migration 
 
 `php artisan migrate`  

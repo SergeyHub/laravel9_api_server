@@ -104,6 +104,6 @@ class SclassController extends Controller
     {
         DB::table('sclasses')->where('id',$id)->delete();
 
-        return response('Delete Successfully');
+        return response(' Sclass Delete Successfully');
     }
 }

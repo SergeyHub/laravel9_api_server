@@ -16,10 +16,10 @@ class SubjectController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function doValidate(SubjectRequest $request)
+    /*public function doValidate(SubjectRequest $request)
     {
         return "Success";
-    }
+    }*/
 
     public function index()
     {
@@ -68,7 +68,8 @@ class SubjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $subject = Subject::findOrFail($id);
+        return response()->json($subject);
     }
 
     /**
@@ -91,7 +92,13 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subject = Subject::find($id);
+        $subject->update($request->all());
+        /*$subject->class_id = $request->input('class_id');
+        $subject->subject_name = $request->input('subject_name');
+        $subject->subject_code = $request->input('subject_code');
+        $subject->save();*/
+        return response('Subject Updated Successfully');
     }
 
     /**
@@ -102,6 +109,7 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Subject::where('id',$id)->delete();
+        return response('Subject Delete Successfully');
     }
 }

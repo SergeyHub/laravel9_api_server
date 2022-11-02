@@ -176,8 +176,8 @@ Psy Shell v0.11.8 (PHP 8.1.8 — cli) by Justin Hileman
 #### 12. Subject Model route controller request
 `php artisan make:model Subject -m`  
 `php artisan make:controller Api/SubjectController --resource`  
-
-
+git push -u origin master  
+#### 13. Subject Controller show store update destroy methods
 
 
 

@@ -38,6 +38,7 @@ class SectionController extends Controller
     public function store(Request $request)
     {
         $section = Section::create($request->all());
+        dd ($section);
         return  response('Section Inserted');
     }
 
@@ -49,7 +50,8 @@ class SectionController extends Controller
      */
     public function show($id)
     {
-        //
+        $section = Section::findOrFail($id);
+        return response()->json($section);
     }
 
     /**
@@ -72,7 +74,10 @@ class SectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $section = Section::find($id);
+        $section->update($request->all());
+
+        return response('Section №'.$id.' Updated Successfully');
     }
 
     /**
@@ -83,6 +88,7 @@ class SectionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Section::where('id',$id)->delete();
+        return response('Section № '.$id.' Delete Successfully');
     }
 }

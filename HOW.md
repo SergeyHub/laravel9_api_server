@@ -178,7 +178,7 @@ Psy Shell v0.11.8 (PHP 8.1.8 — cli) by Justin Hileman
 `php artisan make:controller Api/SubjectController --resource`  
 git push -u origin master  
 #### 13. Subject Controller show store update destroy methods
-#### 14. Section model
+#### 14. Section model Api/SectionController
 php artisan make:model Section -m  
 php artisan make:controller Api/SectionController --resource  
 

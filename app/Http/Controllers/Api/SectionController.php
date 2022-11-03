@@ -38,7 +38,7 @@ class SectionController extends Controller
     public function store(Request $request)
     {
         $section = Section::create($request->all());
-        dd ($section);
+        //dd ($section);
         return  response('Section Inserted');
     }
 

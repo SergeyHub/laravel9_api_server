@@ -181,7 +181,10 @@ git push -u origin master
 #### 14. Section model Api/SectionController
 php artisan make:model Section -m  
 php artisan make:controller Api/SectionController --resource  
-
+#### 15. Student model Api/SectionController
+php artisan make:model Student -m  
+php artisan migrate
+php artisan make:controller Api/StudentController --resource  
 
 
 

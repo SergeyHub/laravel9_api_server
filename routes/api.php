@@ -5,6 +5,7 @@ use \App\Http\Controllers\PostController;
 use \App\Http\Controllers\Api\SclassController;
 use \App\Http\Controllers\Api\SubjectController;
 use \App\Http\Controllers\Api\SectionController;
+use \App\Http\Controllers\Api\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,7 @@ Route::controller(PostController::class)->group(function () {
 Route::ApiResource('/class', SclassController::class);
 Route::ApiResource('/subject', SubjectController::class);
 Route::ApiResource('/section', SectionController::class);
+Route::ApiResource('/student', StudentController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

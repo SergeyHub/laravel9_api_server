@@ -185,10 +185,20 @@ php artisan make:controller Api/SectionController --resource
 php artisan make:model Student -m  
 php artisan migrate
 php artisan make:controller Api/StudentController --resource  
-
-
-
-
+#### 16. Product Model Migrateion Controller Request
+http://localhost:8000/api/products/5  
+```
+method PUT  
+x-www-form-urlencoded  
+body  
+key value 
+name Iphone 5 updated  
+description product description updated    
+```
+![Screenshot](readme/update_product.JPG)   
+`git add .`  
+`git commit -m "16. Product Model Migrateion Controller Request"`  
+`git push -u origin master`   
 
 -------------------old--------------------
 ##### 1.3 Migration 

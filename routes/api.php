@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 //        require __DIR__ . '/api/v1/comments.php';
   //  });
 
+//  Products
 Route::get('products', [ProductController::class, 'index']);
 Route::get('products/{id}', [ProductController::class, 'show']);
 Route::post('products', [ProductController::class, 'store']);
@@ -40,11 +41,14 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/users', 'store')->name('store');
     Route::patch('/users/{user}', 'update')->name('update');
 });
-
+//  Posts Users
 Route::controller(PostController::class)->group(function () {
     Route::get('/posts', 'index');
     Route::get('/posts/{post}', 'show');
-    Route::post('/users', 'store')->name('store');
+    Route::post('/posts', 'store')->name('store');
+    Route::patch('/posts{post}', 'update')->name('update');
+    Route::delete('/posts{post}', 'destroy')->name('destroy');
+    //Route::post('/users', 'store')->name('store');
     //Route::patch('/users/{user}', 'update')->name('update');
 });
 

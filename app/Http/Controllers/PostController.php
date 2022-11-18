@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
@@ -17,7 +18,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::query()->get();
+        $posts = Post::query()->get();  // Eloquent ORM
+        //$posts = Post::query()->where('id','=',1)->get();  // Eloquent ORM
 
         return new JsonResponse([
             'data' => $posts
@@ -30,17 +32,19 @@ class PostController extends Controller
      * @param  \App\Http\Requests\StorePostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request)
+    public function store(Request $request)
     {
         //Post::query()->create($request->toArray());
-        $created = Post::query()->create([
+        $post = Post::query()->create([
             'title' => $request->title,
             'body'  => $request->body,
         ]);
 
         return new JsonResponse([
-            'data' => $created
-        ]);
+            'status' => true,
+            'message' => "Post successfully created.",
+            'data' => $post
+        ],200);
     }
 
     /**
@@ -63,9 +67,26 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
-        //
+        $created = DB::transaction(function () use ($request) {
+
+            $created = Post::query()->create([
+                'title' => $request->title,
+                'body' => $request->body,
+            ]);
+            if($userIds = $request->user_ids){
+                $created->users()->sync($userIds);
+            }
+            return $created;
+        });
+
+        return new JsonResponse([
+            'status' => true,
+            'message' => "Post № = ".$post." successfully created.",
+            'data' => $created
+        ]);
+
     }
 
     /**
@@ -76,6 +97,15 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $deleted = $post->forceDelete();
+
+        if(!$deleted){
+            return new JsonResponse([
+                'error' => 'Could not delete resource.',
+            ], 400);
+        }
+        return new JsonResponse([
+            'data' => 'success'
+        ]);
     }
 }

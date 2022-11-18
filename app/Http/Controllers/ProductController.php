@@ -7,7 +7,6 @@ use App\Models\Product;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use Validator;
 
 class ProductController extends Controller
 {
@@ -28,14 +27,16 @@ class ProductController extends Controller
         try {
 
             // Create Product
-            Product::create([
+            $product = Product::create([
                 'name' => $request->name,
                 'description' => $request->description
             ]);
 
             // Return Json Response
             return response()->json([
-                'message' => "Product successfully created."
+                'status' => true,
+                'message' => "Product successfully created.",
+                'product' => $product
             ], 200);
         } catch (\Exception $e) {
             // Return Json Response
@@ -64,20 +65,21 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         try {
-            // Find Product Detail
+             // Find Product Detail
             $product = Product::find($id);
 
             if (!$product) {
                 return response()->json([
-                    'message' => 'Product № = ' . $id . ' Not Found.'
-                ], 404);
+                    'message' => 'Product № = ' . $id . ' Not Found.',
+                 ], 404);
             }
             $product->update($request->all());
 
-            // Update Product
-            $product->save();
-            //return $product;
-            return response('Product № = '.$id.'  Updated Successfully');
+            return response()->json([
+                'status' => true,
+                'message' => 'Product № = '.$id.'  Updated Successfully',
+                'product' => $product
+            ], 200);
 
         } catch (\Exception $e) {
             // Return Json Response

@@ -18,9 +18,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::query()->get();  // Eloquent ORM
+        //$posts = Post::query()->get();  // Eloquent ORM
+        $pageSize = $request->page_size ?? 10;
+        $posts = Post::query()->paginate($pageSize);
         //$posts = Post::query()->where('id','=',1)->get();  // Eloquent ORM
 
         /*return new JsonResponse([
@@ -37,19 +39,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //Post::query()->create($request->toArray());
-        //$post = Post::query()->create([
-        //'title' => $request->title,
-        //'body'  => $request->body,
-        //]);
-
-        /*return new JsonResponse([
-            'status' => true,
-            'message' => "Post successfully created.",
-            'data' => $post
-        ],200);*/
-
-        $created = DB::transaction(function () use ($request) {
+       $created = DB::transaction(function () use ($request) {
 
             $created = Post::query()->create([
                 'title' => $request->title,
@@ -86,7 +76,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $created = DB::transaction(function () use ($request) {
+        /*$created = DB::transaction(function () use ($request) {
 
             $created = Post::query()->create([
                 'title' => $request->title,
@@ -102,7 +92,18 @@ class PostController extends Controller
             'status' => true,
             'message' => "Post № = " . $post . " successfully created.",
             'data' => $created
+        ]);*/
+        $updated = $post->update([
+            'title' => $request->title ?? $post->title,
+            'body' => $request->body ?? $post->body,
         ]);
+        if(!$updated){
+            return new JsonResponse([
+                'error' => 'Failed to update model.'
+            ], 400);
+        }
+
+        return new PostResource($post);
 
     }
 
@@ -122,7 +123,7 @@ class PostController extends Controller
             ], 400);
         }
         return new JsonResponse([
-            'data' => 'success'
+            'data' => "Post № = " . $post . " successfully delete."
         ]);
     }
 }

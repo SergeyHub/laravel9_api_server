@@ -203,6 +203,12 @@ description product description updated
  `php artisan make:resource PostResource`  
  ![Screenshot](readme/db transaction.JPG)   
 #### 18. Edit api routes 
+#### 19. Pagination
+http://localhost:8000/api/v1/posts?page=1&page_size=7  
+
+
+
+
  
  
 -------------------old--------------------

@@ -16,7 +16,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::query()->paginate($request->page_size ?? 20);
+        $comments = Comment::query()->paginate($request->page_size ?? 10);
         return CommentResource::collection($comments);
     }
 
@@ -26,9 +26,15 @@ class CommentController extends Controller
      * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCommentRequest $request)
+    public function store(Request $request)
     {
-        //
+        $created = $repository->create($request->only([
+            'body',
+            'user_id',
+            'post_id',
+        ]));
+
+        return new CommentResource($created);
     }
 
     /**
@@ -39,7 +45,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        return new CommentResource($comment);
     }
 
     /**

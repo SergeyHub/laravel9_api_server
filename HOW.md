@@ -199,10 +199,10 @@ description product description updated
 `git add .`  
 `git commit -m "16. Product Model Migrateion Controller Request"`  
 `git push -u origin master`   
- ####17. Post resource DB Transaction post_user table
+ ####17. Post resource. DB Transaction post_user table
  `php artisan make:resource PostResource`  
  ![Screenshot](readme/db transaction.JPG)   
- 
+#### 18. Edit api routes 
  
  
 -------------------old--------------------

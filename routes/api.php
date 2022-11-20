@@ -7,6 +7,8 @@ use \App\Http\Controllers\Api\SubjectController;
 use \App\Http\Controllers\Api\SectionController;
 use \App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\ProductController;
+use \App\Helpers\Routes\RouteHelper;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,13 +23,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::prefix('v1')
-   // ->group(function (){
-        //\App\Helpers\Routes\RouteHelper::includeRouteFiles(__DIR__ . '/api/v1');
+Route::prefix('v1')
+    ->group(function (){RouteHelper::includeRouteFiles(__DIR__ . '/api/v1');
        // require __DIR__ . '/api/v1/users.php';
-//        require __DIR__ . '/api/v1/posts.php';
-//        require __DIR__ . '/api/v1/comments.php';
-  //  });
+        require __DIR__ . '/api/v1/posts.php';
+       // require __DIR__ . '/api/v1/comments.php';
+    });
 
 //  Products
 Route::get('products', [ProductController::class, 'index']);
@@ -42,15 +43,14 @@ Route::controller(UserController::class)->group(function () {
     Route::patch('/users/{user}', 'update')->name('update');
 });
 //  Posts Users
+/*
 Route::controller(PostController::class)->group(function () {
     Route::get('/posts', 'index');
     Route::get('/posts/{post}', 'show');
     Route::post('/posts', 'store')->name('store');
     Route::patch('/posts{post}', 'update')->name('update');
     Route::delete('/posts{post}', 'destroy')->name('destroy');
-    //Route::post('/users', 'store')->name('store');
-    //Route::patch('/users/{user}', 'update')->name('update');
-});
+});*/
 
 Route::ApiResource('/class', SclassController::class);
 Route::ApiResource('/subject', SubjectController::class);

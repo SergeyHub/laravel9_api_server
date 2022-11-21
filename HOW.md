@@ -208,8 +208,9 @@ http://localhost:8000/api/v1/posts?page=1&page_size=7
 #### 20. Edit api routes
 #### 21. CommentContoller  
 #### 22. PostRepository. Edit PostController   
-
-
+git push -u origin master  
+#### 23. Laravel Exceptions
+php artisan make:exception GeneralJsonException  
 
 
 

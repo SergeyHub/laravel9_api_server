@@ -12,4 +12,5 @@ abstract class BaseRepository
     abstract public function forceDelete($model);
 
 
+
 }

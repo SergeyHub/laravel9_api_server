@@ -205,6 +205,13 @@ description product description updated
 #### 18. Edit api routes 
 #### 19. Pagination
 http://localhost:8000/api/v1/posts?page=1&page_size=7  
+#### 20. Edit api routes
+#### 21. CommentContoller  
+#### 22. PostRepository. Edit PostController   
+
+
+
+
 
 
 

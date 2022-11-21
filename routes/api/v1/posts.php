@@ -18,5 +18,6 @@ Route::middleware([
 
         Route::patch('/posts/{post}', [PostController::class, 'update'])->name('update');
 
-        Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('destroy');
+        Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('destroy')
+            ->whereNumber('post');
     });

@@ -3,35 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Repositories\CommentRepository;
 use App\Http\Resources\CommentResource;
-use App\Http\Requests\StoreCommentRequest;
-use App\Http\Requests\UpdateCommentRequest;
+
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return ResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        $comments = Comment::query()->paginate($request->page_size ?? 10);
+        //throw new GeneralJsonException('some error', 422);
+        $pageSize = $request->page_size ?? 20;
+        $comments = Comment::query()->paginate($pageSize);
+
         return CommentResource::collection($comments);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCommentRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return CommentResource
      */
-    public function store(Request $request)
+    public function store(Request $request, CommentRepository $repository)
     {
         $created = $repository->create($request->only([
             'body',
             'user_id',
-            'post_id',
+            'post_id'
         ]));
 
         return new CommentResource($created);
@@ -40,8 +46,8 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Comment  $Comment
+     * @return CommentResource
      */
     public function show(Comment $comment)
     {
@@ -51,23 +57,33 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCommentRequest  $request
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Comment  $Comment
+     * @return CommentResource | JsonResponse
      */
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(Request $request, Comment $comment, CommentRepository $repository)
     {
-        //
+        $comment = $repository->update($comment, $request->only([
+            'body',
+            'user_id',
+            'post_id'
+        ]));
+        return new CommentResource($comment);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Comment  $Comment
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Comment $comment)
+    public function destroy(Comment $comment, CommentRepository $repository)
     {
-        //
+        $comment = $repository->forceDelete($comment);
+        return new JsonResponse([
+            'data' => 'Comment N '.$comment.' Delete success'
+        ]);
     }
 }
+

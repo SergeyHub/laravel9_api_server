@@ -211,7 +211,7 @@ http://localhost:8000/api/v1/posts?page=1&page_size=7
 git push -u origin master  
 #### 23. Laravel Exceptions
 php artisan make:exception GeneralJsonException  
-
+#### 24. Edit CommentController
 
 
 

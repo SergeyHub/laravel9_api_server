@@ -1,7 +1,5 @@
 <?php
 
-use \App\Http\Controllers\UserController;
-use \App\Http\Controllers\PostController;
 use \App\Http\Controllers\Api\SclassController;
 use \App\Http\Controllers\Api\SubjectController;
 use \App\Http\Controllers\Api\SectionController;
@@ -36,21 +34,6 @@ Route::get('products/{id}', [ProductController::class, 'show']);
 Route::post('products', [ProductController::class, 'store']);
 Route::put('products/{id}', [ProductController::class, 'update']);
 Route::delete('products/{id}', [ProductController::class, 'destroy']);
-
-Route::controller(UserController::class)->group(function () {
-    Route::get('/users/{user}', 'show');
-    Route::post('/users', 'store')->name('store');
-    Route::patch('/users/{user}', 'update')->name('update');
-});
-//  Posts Users
-/*
-Route::controller(PostController::class)->group(function () {
-    Route::get('/posts', 'index');
-    Route::get('/posts/{post}', 'show');
-    Route::post('/posts', 'store')->name('store');
-    Route::patch('/posts{post}', 'update')->name('update');
-    Route::delete('/posts{post}', 'destroy')->name('destroy');
-});*/
 
 Route::ApiResource('/class', SclassController::class);
 Route::ApiResource('/subject', SubjectController::class);

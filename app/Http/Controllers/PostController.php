@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Http\Resources\PostResource;
 use App\Repositories\PostRepository;
+//use App\Events\Models\Post\PostCreated;
+//use App\Events\Models\Post\PostUpdated;
+
 use App\Exceptions\GeneralJsonException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,9 +23,12 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
+        //event(new PostCreated(Post::factory()->make()));
         //throw new GeneralJsonException('some error', 422);
         $pageSize = $request->page_size ?? 20;
         $posts = Post::query()->paginate($pageSize);
+
+        //$posts = Post::latest()->take(10)->get();
 
         return PostResource::collection($posts);
     }

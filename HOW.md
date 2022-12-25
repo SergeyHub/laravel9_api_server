@@ -212,12 +212,53 @@ git push -u origin master
 #### 23. Laravel Exceptions
 php artisan make:exception GeneralJsonException  
 #### 24. Edit CommentController
-
-
-
-
-
+#### 25. Create a service class. Use event + event listener
+Event Listener = function listens to an event  
  
+`php artisan make:event Models/Post/PostCreated`  
+`php artisan make:event Models/Post/PostUpdated`  
+`php artisan make:event Models/Post/PostDeleted`  
+   
+Edit \app\Events\Models\Post\PostCreated.php  
+```
+namespace App\Events\Models\Post;
+use App\Models\Post;
+protected $post;
+public function __construct( $post )
+    {
+        $this->post = $post;
+    }
+```
+Edit \app\Repositories\PostRepository.php
+```
+use App\Models\Post;
+use App\Events\Models\Post\PostCreated;
+use App\Events\Models\Post\PostDeleted;
+use App\Events\Models\Post\PostUpdated;
+
+event(new PostCreated($created));
+event(new PostUpdated($post));
+event(new PostDeleted($post));
+```
+`php artisan make:listener SendWelcomeEmail`   
+
+Edit \app\Listeners\SendWelcomeEmail.php
+```
+    public function handle($event)
+    {
+        dump("Email sent.");
+    }
+```
+`php artisan make:subscriber PostSubscriber`  
+Edit \app\Providers\EventServiceProvider.php
+
+
+![Screenshot](readme/email-sent.JPG) 
+ 
+ 
+ 
+ 
+######=================  old  ======================== 
  
 -------------------old--------------------
 ##### 1.3 Migration 

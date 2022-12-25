@@ -4,6 +4,9 @@
 namespace App\Repositories;
 
 use App\Models\Post;
+use App\Events\Models\Post\PostCreated;
+use App\Events\Models\Post\PostDeleted;
+use App\Events\Models\Post\PostUpdated;
 use Illuminate\Support\Facades\DB;
 
 class PostRepository extends BaseRepository
@@ -17,6 +20,7 @@ class PostRepository extends BaseRepository
                 'title' => data_get($attributes, 'title', 'Untitled'),
                 'body' => data_get($attributes, 'body'),
             ]);
+            event(new PostCreated($created));
             if($userIds = data_get($attributes, 'user_ids')){
                 $created->users()->sync($userIds);
             }
@@ -36,6 +40,8 @@ class PostRepository extends BaseRepository
                 'title' => data_get($attributes, 'title', $post->title),
                 'body' => data_get($attributes, 'body', $post->body),
             ]);
+
+            event(new PostUpdated($post));
 
             if(!$updated){
                 throw new \Exception('Failed to update post');
@@ -62,6 +68,8 @@ class PostRepository extends BaseRepository
             if(!$deleted){
                 throw new \Exception("cannot delete post.");
             }
+
+            event(new PostDeleted($post));
             return $deleted;
         });
 

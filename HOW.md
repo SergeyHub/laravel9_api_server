@@ -252,8 +252,35 @@ Edit \app\Listeners\SendWelcomeEmail.php
 `php artisan make:subscriber PostSubscriber`  
 Edit \app\Providers\EventServiceProvider.php
 
-
 ![Screenshot](readme/email-sent.JPG) 
+ 
+#### 26. Sending Email
+`php artisan make:mail WelcomeMail`   
+Edit app\Mail\WelcomeMail.php   
+Create \resources\views\mail 
+
+`php artisan notifications:table`  
+`php artisan migrate`  
+`php artisan make:notification SendEmaiNotification` 
+`php artisan make:controller HomeController`     
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  

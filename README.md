@@ -1,66 +1,289 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Main stages of development
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+#### 1. Installation Project Template. Create Database
 
-## About Laravel
+`composer create-project --prefer-dist  laravel/laravel .`   
+`composer create-project --prefer-dist  laravel/laravel="8.0.*" .` 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+`git init`  
+`git add .`  
+`git commit –m "Install Laravel Template"`  
+**`git remote add origin https://github.com/SergeyHub/laravel9_dingo_api.git`**  
+`git push -u origin master`  
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+##### 1.2 Postgersql
+```
+Let's start SQL Shell (psql). The program will prompt you to enter the name    
+of the server, database, port and user. You can click/skip these items as they  
+will use the default values   
+(for server - localhost, for database - postgres, for port - 5432,  
+as user - postres superuser). 
+Next, you will need to enter a password for the user   
+(by default, the postgres user): 123456 (in my case)  
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![Screenshot](readme/psql.JPG)   
 
-## Learning Laravel
+`postgres=# create database db_name;`  
+  **database list**  
+`select datname from pg_database;`   
+pg_dump dbname > outfile 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**`Edit  env. file`**    
+```
+DB_CONNECTION=pgsql
+DB_HOST=localhost
+DB_PORT=5432
+DB_DATABASE=cargo
+DB_USERNAME=postgres
+DB_PASSWORD=123456
+```
+##### 1.3 MySQL
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+`mysql -u root -p`  
+`create database crud_api; db_name;`  
+`drop database db_name;`   
+`show databases;`  
+`use db_name;`  
+`show tables;`   
+`drop table table_name;`  
+`exit`  
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**`Edit  env. file`**   
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=crud_api
+DB_USERNAME=root
+DB_PASSWORD=123456
+```
 
-## Laravel Sponsors
+#### 2 Install Dingo
+  
+`composer require api-ecosystem-for-laravel/dingo-api`   
+`composer remove api-ecosystem-for-laravel/dingo-api`   
+ `php artisan vendor:publish --provider="Dingo\Api\Provider\LaravelServiceProvider"`
+ 
+**`Edit  env. file`**   
+```
+API_STANDARDS_TREE=vnd
+API_SUBTYPE=storeapi
+API_VERSION=v1
+API_PREFIX=api
+API_NAME=StoresAPI
+API_DEBUG=true
+``` 
+   
+`git init`  
+`git add .`  
+`git commit –m "Comment"`  
+**`git remote add origin https://github.com/SergeyHub/laravel_crud_api_vue_back.git`**  
+`git push -u origin master`  
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+#### 3 Install jwt-auth
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+`composer require tymon/jwt-auth:*`  
 
-## Contributing
+**`Edit  config/app.php file`**
+```
+Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+```
+#####3.1 Publish the config  
+Run the following command to publish the package config file:      
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**`php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"`**  
 
-## Code of Conduct
+You should now have a config/jwt.php file that allows you to configure the basics of this package.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#####3.2 Generate secret key  
 
-## Security Vulnerabilities
+`php artisan jwt:secret`  
+This will update your .env file with something like JWT_SECRET=foobar  
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**`Edit  config/api.php file`**
+```
+'auth' => [
+        'jwt' => 'Dingo\Api\Auth\Provider\JWT'
+    ],
+```
 
-## License
+#### 4. Database Design ER and migration
+![Screenshot](readme/er.JPG)   
+ 
+`php artisan make:model Post --all --api`  
+`php artisan make:model Comment --all --api`
+`php artisan make:model Post_User`
+`php artisan migrate` 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+`git add .`  
+`git commit –m "Comment"`  
+`git push -u origin master`  
+
+#### 5. Seeds & Factories
+seeders->Traits  
+`php artisan db:seed`  
+
+#### 6. Edit Post User & Comment models
+
+```
+php artisan tinker
+Psy Shell v0.11.8 (PHP 8.1.8 — cli) by Justin Hileman
+>>> \App\Models\Post::find(1)
+=> App\Models\Post {#4101
+     id: 1,
+     title: "untitled",
+     body: "[]",
+     created_at: "2022-10-26 19:04:39",
+     updated_at: "2022-10-26 19:04:39",
+   }
+
+>>> \App\Models\Post::find(10)
+=> App\Models\Post {#4717
+     id: 10,
+     title: "untitled",
+     body: "[]",
+     created_at: "2022-10-26 19:04:39",
+     updated_at: "2022-10-26 19:04:39",
+   }
+>>> \App\Models\Post::find(10)->comments
+=> Illuminate\Database\Eloquent\Collection {#4714
+     all: [
+       App\Models\Comment {#3765
+         id: 2,
+         body: "[]",
+         user_id: 2,
+         post_id: 10,
+         created_at: "2022-10-26 19:04:39",
+         updated_at: "2022-10-26 19:04:39",
+       },
+     ],
+   }
+
+>>>    
+```
+#### 7. Edit PostSeeder & CommentFactory. Create FactoryHelper
+
+#### 8. Api Routes
+#### 9. UserController
+`php artisan make:controller UserController`    
+#### 10. Edit api routes
+`git push -u origin master`  
+#### 11. sclasses table
+`php artisan make:model Sclass --all`  
+`php artisan make:controller Api/Sclass --resource`  
+#### 12. Subject Model route controller request
+`php artisan make:model Subject -m`  
+`php artisan make:controller Api/SubjectController --resource`  
+git push -u origin master  
+#### 13. Subject Controller show store update destroy methods
+#### 14. Section model Api/SectionController
+php artisan make:model Section -m  
+php artisan make:controller Api/SectionController --resource  
+#### 15. Student model Api/SectionController
+php artisan make:model Student -m  
+php artisan migrate
+php artisan make:controller Api/StudentController --resource  
+#### 16. Product Model Migrateion Controller Request
+http://localhost:8000/api/products/5  
+```
+method PUT  
+x-www-form-urlencoded  
+body  
+key value 
+name Iphone 5 updated  
+description product description updated    
+```
+![Screenshot](readme/update_product.JPG)   
+`git add .`  
+`git commit -m "16. Product Model Migrateion Controller Request"`  
+`git push -u origin master`   
+ ####17. Post resource. DB Transaction post_user table
+ `php artisan make:resource PostResource`  
+ ![Screenshot](readme/db transaction.JPG)   
+#### 18. Edit api routes 
+#### 19. Pagination
+http://localhost:8000/api/v1/posts?page=1&page_size=7  
+#### 20. Edit api routes
+#### 21. CommentContoller  
+#### 22. PostRepository. Edit PostController   
+git push -u origin master  
+#### 23. Laravel Exceptions
+php artisan make:exception GeneralJsonException  
+#### 24. Edit CommentController
+#### 25. Create a service class. Use event + event listener
+Event Listener = function listens to an event  
+ 
+`php artisan make:event Models/Post/PostCreated`  
+`php artisan make:event Models/Post/PostUpdated`  
+`php artisan make:event Models/Post/PostDeleted`  
+   
+Edit \app\Events\Models\Post\PostCreated.php  
+```
+namespace App\Events\Models\Post;
+use App\Models\Post;
+protected $post;
+public function __construct( $post )
+    {
+        $this->post = $post;
+    }
+```
+Edit \app\Repositories\PostRepository.php
+```
+use App\Models\Post;
+use App\Events\Models\Post\PostCreated;
+use App\Events\Models\Post\PostDeleted;
+use App\Events\Models\Post\PostUpdated;
+
+event(new PostCreated($created));
+event(new PostUpdated($post));
+event(new PostDeleted($post));
+```
+`php artisan make:listener SendWelcomeEmail`   
+
+Edit \app\Listeners\SendWelcomeEmail.php
+```
+    public function handle($event)
+    {
+        dump("Email sent.");
+    }
+```
+`php artisan make:subscriber PostSubscriber`  
+Edit \app\Providers\EventServiceProvider.php
+
+![Screenshot](readme/email-sent.JPG) 
+ 
+#### 26. Sending Email
+`php artisan make:mail WelcomeMail`   
+Edit app\Mail\WelcomeMail.php   
+Create \resources\views\mail 
+
+`php artisan notifications:table`  
+`php artisan migrate`  
+`php artisan make:notification SendEmaiNotification` 
+`php artisan make:controller HomeController`     
+
+#### 27. Unit Testing   
+https://www.youtube.com/watch?v=v6cFJFr0f8M&list=PLSfH3ojgWsQosqpQUc28yP9jJZXrEylJY&index=27  
+`php artisan make:test --help`   
+`php artisan make:test --unit PostRepositoryTest`  
+`vendor\bin>phpunit --filter=PostRepositoryTest`  
+`php artisan test`   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

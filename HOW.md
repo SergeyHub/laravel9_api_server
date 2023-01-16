@@ -264,8 +264,12 @@ Create \resources\views\mail
 `php artisan make:notification SendEmaiNotification` 
 `php artisan make:controller HomeController`     
 
- 
- 
+#### 27. Unit Testing   
+https://www.youtube.com/watch?v=v6cFJFr0f8M&list=PLSfH3ojgWsQosqpQUc28yP9jJZXrEylJY&index=27  
+`php artisan make:test --help`   
+`php artisan make:test --unit PostRepositoryTest`  
+`vendor\bin>phpunit --filter=PostRepositoryTest`  
+`php artisan test`   
  
  
  

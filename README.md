@@ -270,8 +270,11 @@ Testing configuration file : phpunit.xml
 `php artisan make:test --help`   
 `php artisan make:test --unit PostRepositoryTest`  
 `vendor\bin>phpunit --filter=PostRepositoryTest`  
-`php artisan test`   
- 
+`php artisan test`    
+#####Get Posts List
+![Screenshot](readme/get_posts_list.JPG) 
+##### Pagination   
+![Screenshot](readme/pagination.JPG)    
  
  
  

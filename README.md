@@ -5,11 +5,11 @@
 `composer create-project --prefer-dist  laravel/laravel .`   
 `composer create-project --prefer-dist  laravel/laravel="8.0.*" .` 
 
-`git init`  
-`git add .`  
-`git commit –m "Install Laravel Template"`  
-**`git remote add origin https://github.com/SergeyHub/laravel9_dingo_api.git`**  
-`git push -u origin master`  
+`f:\laravel9_api_server>git init`  
+`f:\laravel9_api_server>git add .`  
+`f:\laravel9_api_server>git commit –m "Install Laravel Template"`  
+**`f:\laravel9_api_server>git remote add origin https://github.com/SergeyHub/laravel9_dingo_api.git`**  
+`f:\laravel9_api_server>git push -u origin master`  
 
 ##### 1.2 Postgersql
 ```
